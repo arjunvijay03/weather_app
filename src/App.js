@@ -1,27 +1,26 @@
 
-import { useEffect} from 'react';
+import { useEffect, useMemo} from 'react';
 import './App.css';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCurrentWeather, fetchData, handleCityChange } from './Redux/DataReducer';
 import dateFormat from "dateformat";
 import ReactLoading from 'react-loading';
+import Card from './components/card/Card';
 
 function App() {
-  const {Data, loading, city} = useSelector(state => state.fetchData)
+  const {Data, loading, city, forecastData} = useSelector(state => state.fetchData)
   const dispatch = useDispatch()
-  Data && console.log(Data);
-
   const now = new Date()
 
   return (
     <div className="App">
       <form className='inputFieldCont' action="">
       <i className="fa-solid fa-magnifying-glass searchIcon"></i>
-        <input className='cityInput' onChange={(e)=>dispatch(handleCityChange(e))} type="text" />
+        <input className='cityInput' onChange={(e)=>dispatch(handleCityChange(e))} autoFocus type="text" placeholder='Search' />
         <button style={{display:'none'}} type='submit'  onClick={(e)=>{
           e.preventDefault()
           dispatch(fetchData(city))
-          }}>submit</button>
+          }}></button>
       </form>
 
       {Data && <div className="weatherDisplayContainer">
@@ -37,6 +36,14 @@ function App() {
             <div className="temperature">{parseInt(Data?.main.temp)}&deg;C </div>
             <div className="maxNminTemp">{parseInt(Data?.main.temp_max)}&deg;/{parseInt(Data?.main.temp_min)}&deg;</div>
           </div>
+        </div>
+
+        <div className="wdcBottom">
+          {forecastData.map((item, index)=>{
+            if(index == 0) return;
+            return <Card data={item} key={index}></Card>
+          })
+          }
         </div>
 
       </div>}

@@ -35,6 +35,9 @@
   color: #fff;
   font-size: 1rem;
 }
+.cityInput::placeholder{
+  color: white;
+}
 input:is(:focus, :active){
   outline: none;
   
@@ -73,7 +76,6 @@ input:is(:focus, :active){
   -webkit-backdrop-filter: blur( 4.5px );
   border-radius: 10px;
   color: #fff;
-  display: flex;
   align-items: center;
  
 }
@@ -107,6 +109,26 @@ input:is(:focus, :active){
   font-weight: 200;
   text-align: right;
 }
+.wdcBottom{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media (max-width:500px) {
   .weatherDisplayContainer{
@@ -133,5 +155,8 @@ input:is(:focus, :active){
   }
   .date, .weatherDes{
     margin-left: 0;
+  }
+  .cityName{
+    font-size: 2rem;
   }
 }

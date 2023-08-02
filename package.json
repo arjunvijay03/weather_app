@@ -2,6 +2,7 @@
   "name": "weather-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://arjunvijay03.github.io/weather_app",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",

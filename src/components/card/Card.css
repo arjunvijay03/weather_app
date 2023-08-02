@@ -1,0 +1,18 @@
+.cardContainer{
+    width: 100px;
+    /* height: 150px; */
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000080;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 10px;
+}
+.cIcon{
+    margin-block: -5px;
+}
+.cDate, .cWeather{
+    font-size: 1.2rem;
+    font-weight: 500;
+}

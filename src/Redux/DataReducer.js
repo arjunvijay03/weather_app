@@ -3,15 +3,17 @@ import axios from 'axios'
 
 const INITIAL_STATE = {
     Data:null,
+    forecastData:null,
     loading:false,
     city : ''
 }
 
 export const fetchData = createAsyncThunk('apiCall/fetchData',async(city)=>{
     
-    const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}&units=metric`)
-    return response
-})
+    const weather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_API_KEY}&units=metric`)
+    const forecast = await axios.get(`http://api.weatherapi.com/v1/forecast.json?q=${city}&days=5&key=bc21ef0965364a939c774652230805`)
+    return {weather, forecast}
+}) 
 
 
 
@@ -33,10 +35,12 @@ const fetchDataSlice = createSlice({
         },
         [fetchData.fulfilled] : (state, action) =>{
             state.loading = false
-            state.Data = action.payload.data
+            state.Data = action.payload.weather.data
+            state.forecastData = action.payload.forecast.data.forecast.forecastday
         },
-        [fetchData.rejected] : (state) =>{
+        [fetchData.rejected] : (state, action) =>{
             state.loading = false
+            alert("Give a valid city name")
         },
       
     }
